@@ -9,7 +9,7 @@ const Phone=()=>{
               async function initializeClient() {
                 try {
                   // const token = await getCallToken(); // Call the function to generate the token
-                  const token = process.env.KEY;
+                  const token = process.env.TOKEN;
           
                 //   const params = {
                 //     sounds: {
