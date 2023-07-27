@@ -5,36 +5,37 @@ const Phone=()=>{
 
      const [phoneNumber, setPhoneNumber] = useState('');
      const [client, setClient] = useState(null);
+     var appURL = window.location.origin;
          useEffect(() => {
               async function initializeClient() {
                 try {
                   // const token = await getCallToken(); // Call the function to generate the token
                   const token = "ATCAPtkn_83de196b4ee5ccf5b613dcebb39321c92718d72f23a8a8263830aaed9851ff05"
           
-                //   const params = {
-                //     sounds: {
-                //         dialing: `${appURL}/sounds/dial.mp3`,
-                //         ringing: `${appURL}/sounds/ring.mp3`,
-                //     },
-                //   };
+                  const params = {
+                    sounds: {
+                        dialing: `${appURL}/sounds/dial.mp3`,
+                        ringing: `${appURL}/sounds/ring.mp3`,
+                    },
+                  };
           
                  
           
                   // Mount the client and handle events
                   
-                  const newClient = new Africastalking.Client(token);
-                  setClient(newClient); // Store the client instance in the state variable
-                  console.log(newClient)
+                  const client = new Africastalking.Client(token,params);
+                  setClient(client); // Store the client instance in the state variable
+                  console.log(client)
                   // Mount the client and handle events
-                  newClient.on('ready', function () {
+                  client.on('ready', function () {
                     console.log("ready to make a call");
                   });
         
-                  newClient.on('incomingcall', function (params) {
+                 client.on('incomingcall', function (params) {
                     alert(`${params.from} is calling you`);
                   });
           
-                  newClient.on('hangup', function (hangupCause) {
+                  client.on('hangup', function (hangupCause) {
                     alert(`Call hung up (${hangupCause.code} - ${hangupCause.reason})`);
                   });
                 } catch (error) {
@@ -43,7 +44,7 @@ const Phone=()=>{
               }
           
               initializeClient();
-            }, [ ]);
+            }, [appURL]);
         
         
           function handlePhoneNumberChange(event) {
