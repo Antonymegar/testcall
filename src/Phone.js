@@ -10,7 +10,7 @@ const Phone=()=>{
               async function initializeClient() {
                 try {
                   // const token = await getCallToken(); // Call the function to generate the token
-                  const token = "ATCAPtkn_83de196b4ee5ccf5b613dcebb39321c92718d72f23a8a8263830aaed9851ff05"
+                  let token = process.env.TOKEN
           
                   const params = {
                     sounds: {
