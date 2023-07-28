@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Africastalking from 'africastalking-client';
+import axios from 'axios';
 
 const Phone=()=>{
 
@@ -9,8 +10,8 @@ const Phone=()=>{
          useEffect(() => {
               async function initializeClient() {
                 try {
-                  // const token = await getCallToken(); // Call the function to generate the token
-                  let token = process.env.TOKEN
+                  // const token  // Call the function to generate the token
+                
           
                   const params = {
                     sounds: {
@@ -28,13 +29,17 @@ const Phone=()=>{
                   console.log(client)
                   // Mount the client and handle events
                   client.on('ready', function () {
-                    console.log("ready to make a call");
+                    alert("you are ready to make a call");
                   });
-        
-                 client.on('incomingcall', function (params) {
+
+                  client.on('calling', function (params) {
+                    alert(`You are calling ${phoneNumber}`);
+                  });
+                  
+                  client.on('incomingcall', function (params) {
                     alert(`${params.from} is calling you`);
                   });
-          
+                  
                   client.on('hangup', function (hangupCause) {
                     alert(`Call hung up (${hangupCause.code} - ${hangupCause.reason})`);
                   });
@@ -45,6 +50,19 @@ const Phone=()=>{
           
               initializeClient();
             }, [appURL]);
+            async function getCallToken() {
+                try {
+                  const response = await axios.post('http://localhost:5000/api/make-call');
+            
+                  if (response.data && response.data.token) {
+                    return response.data.token;
+                  } else {
+                    throw new Error('Failed to get token');
+                  }
+                } catch (error) {
+                  throw new Error('Error generating token: ' + error.message);
+                }
+              }
         
         
           function handlePhoneNumberChange(event) {

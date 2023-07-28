@@ -1,0 +1,14 @@
+{
+  "name": "yu",
+  "version": "1.0.0",
+  "description": "yt",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5"
+  }
+}
