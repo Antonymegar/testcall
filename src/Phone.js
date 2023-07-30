@@ -10,7 +10,7 @@ const Phone=()=>{
          useEffect(() => {
               async function initializeClient() {
                 try {
-                  // const token  // Call the function to generate the token
+                  // const token = // Call the function to generate the token
                 
           
                   const params = {
@@ -51,17 +51,17 @@ const Phone=()=>{
               initializeClient();
             }, [appURL]);
             async function getCallToken() {
-                try {
-                  const response = await axios.post('http://localhost:5000/api/make-call');
+                // try {
+                //   const response = await axios.post('http://localhost:8080/api/make-call');
             
-                  if (response.data && response.data.token) {
-                    return response.data.token;
-                  } else {
-                    throw new Error('Failed to get token');
-                  }
-                } catch (error) {
-                  throw new Error('Error generating token: ' + error.message);
-                }
+                //   if (response.data && response.data.token) {
+                //     return response.data.token;
+                //   } else {
+                //     throw new Error('Failed to get token');
+                //   }
+                // } catch (error) {
+                //   throw new Error('Error generating token: ' + error.message);
+                // }
               }
         
         
